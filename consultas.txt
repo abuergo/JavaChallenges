@@ -1,0 +1,58 @@
+> use ecommerce
+switched to db ecommerce
+> db.productos.insert({nombre: 'Fideos', categoria: 'Harina', precio: 120, stock: 20}) 
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Leche', categoria: 'Lacteos', precio: 580, stock: 40})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Yogurt', categoria: 'Lacteos', precio: 900, stock: 25})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Harina 000', categoria: 'Harinas', precio: 1280, stock: 15})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Agua', categoria: 'Bebida', precio: 1700, stock: 50})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Fanta', categoria: 'Bebida', precio: 2300, stock: 40})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Sprite', categoria: 'Bebida', precio: 2860, stock: 35})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Manzana', categoria: 'Frutas', precio: 3350, stock: 30})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Banana', categoria: 'Frutas', precio: 4320, stock: 20})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({nombre: 'Pera', categoria: 'Frutas', precio: 4990, stock: 10})
+WriteResult({ "nInserted" : 1 })
+> db.productos.find()
+{ "_id" : ObjectId("61ef1315618875d70f3b2150"), "nombre" : "Fideos", "categoria" : "Harina", "precio" : 120, "stock" : 20 }
+{ "_id" : ObjectId("61ef135a618875d70f3b2151"), "nombre" : "Leche", "categoria" : "Lacteos", "precio" : 580, "stock" : 40 }
+{ "_id" : ObjectId("61ef1387618875d70f3b2152"), "nombre" : "Yogurt", "categoria" : "Lacteos", "precio" : 900, "stock" : 25 }
+{ "_id" : ObjectId("61ef13ce618875d70f3b2153"), "nombre" : "Harina 000", "categoria" : "Harinas", "precio" : 1280, "stock" : 15 }
+{ "_id" : ObjectId("61ef13eb618875d70f3b2154"), "nombre" : "Agua", "categoria" : "Bebida", "precio" : 1700, "stock" : 50 }
+{ "_id" : ObjectId("61ef1402618875d70f3b2155"), "nombre" : "Fanta", "categoria" : "Bebida", "precio" : 2300, "stock" : 40 }
+{ "_id" : ObjectId("61ef1438618875d70f3b2156"), "nombre" : "Sprite", "categoria" : "Bebida", "precio" : 2860, "stock" : 35 }
+{ "_id" : ObjectId("61ef14b3618875d70f3b2157"), "nombre" : "Manzana", "categoria" : "Frutas", "precio" : 3350, "stock" : 30 }
+{ "_id" : ObjectId("61ef14c7618875d70f3b2158"), "nombre" : "Banana", "categoria" : "Frutas", "precio" : 4320, "stock" : 20 }
+{ "_id" : ObjectId("61ef14e2618875d70f3b2159"), "nombre" : "Pera", "categoria" : "Frutas", "precio" : 4990, "stock" : 10 }
+> db.productos.insert({nombre: 'Coca cola', categoria: 'Bebida', precio: 5100, stock: 10})
+WriteResult({ "nInserted" : 1 })
+> db.productos.find({"precio": {$lt:1000}})
+{ "_id" : ObjectId("61ef1315618875d70f3b2150"), "nombre" : "Fideos", "categoria" : "Harina", "precio" : 120, "stock" : 20 }
+{ "_id" : ObjectId("61ef135a618875d70f3b2151"), "nombre" : "Leche", "categoria" : "Lacteos", "precio" : 580, "stock" : 40 }
+{ "_id" : ObjectId("61ef1387618875d70f3b2152"), "nombre" : "Yogurt", "categoria" : "Lacteos", "precio" : 900, "stock" : 25 }
+> db.getCollection('productos').find({$and: [{"precio": {$gte: 1000}}, {"precio": {$lte: 3000}}]})
+{ "_id" : ObjectId("61ef13ce618875d70f3b2153"), "nombre" : "Harina 000", "categoria" : "Harinas", "precio" : 1280, "stock" : 15 }
+{ "_id" : ObjectId("61ef13eb618875d70f3b2154"), "nombre" : "Agua", "categoria" : "Bebida", "precio" : 1700, "stock" : 50 }
+{ "_id" : ObjectId("61ef1402618875d70f3b2155"), "nombre" : "Fanta", "categoria" : "Bebida", "precio" : 2300, "stock" : 40 }
+{ "_id" : ObjectId("61ef1438618875d70f3b2156"), "nombre" : "Sprite", "categoria" : "Bebida", "precio" : 2860, "stock" : 35 }
+> db.productos.find({"precio": {$gt: 3000}})
+{ "_id" : ObjectId("61ef14b3618875d70f3b2157"), "nombre" : "Manzana", "categoria" : "Frutas", "precio" : 3350, "stock" : 30 }
+{ "_id" : ObjectId("61ef14c7618875d70f3b2158"), "nombre" : "Banana", "categoria" : "Frutas", "precio" : 4320, "stock" : 20 }
+{ "_id" : ObjectId("61ef14e2618875d70f3b2159"), "nombre" : "Pera", "categoria" : "Frutas", "precio" : 4990, "stock" : 10 }
+{ "_id" : ObjectId("61ef16bf618875d70f3b215a"), "nombre" : "Coca cola", "categoria" : "Bebida", "precio" : 5100, "stock" : 10 }
+> db.getCollection('productos').find().sort({"precio":1}).skip(2).limit(1)
+{ "_id" : ObjectId("61ef1387618875d70f3b2152"), "nombre" : "Yogurt", "categoria" : "Lacteos", "precio" : 900, "stock" : 25 }
+> db.getCollection('productos').update({"precio": {$gt: 0}}, {$set: {"stock2":100}},{"multi":true})
+WriteResult({ "nMatched" : 11, "nUpserted" : 0, "nModified" : 11 })
+> db.getCollection('productos').update({"precio": {$gt: 4000}}, {$set: {"stock2":0}},{"multi":true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+> db.getCollection('productos').remove({"precio": {$lt: 1000}},{"multi":true})
+WriteResult({ "nRemoved" : 3 })
+> db.productos.createUser({user:"pepe", pwd:"abc123", roles: [{role:"read, db: "ecommerce"}]})
