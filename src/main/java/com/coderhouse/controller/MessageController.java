@@ -56,7 +56,7 @@ public class MessageController {
 
     private List<Message> dataMensajes() {
         return List.of(
-                new Message(0L, "Mensaje Puerto 8082"),
+                new Message(0L, "Mensaje-ABCD"),
                 new Message(1L, "Mensaje-ABCD"),
                 new Message(2L, "Mensaje-ABCD"),
                 new Message(3L, "Mensaje-ABCD"),
